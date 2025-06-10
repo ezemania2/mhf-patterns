@@ -12,5 +12,6 @@
 //#define __SHOP 1
 //#define __WEAPONS 1
 //#define __DECOID 1
+//#define __CONSTANTS 1
 
 #include <mhfdat/index.hexpat>
