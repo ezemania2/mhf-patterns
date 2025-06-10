@@ -55,3 +55,7 @@
 #ifdef __DECOID
 #include <mhfdat/decoID.hexpat>
 #endif
+
+#ifdef __CONSTANTS
+#include <mhfdat/constants.hexpat>
+#endif
