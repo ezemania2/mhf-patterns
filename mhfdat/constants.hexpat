@@ -21,7 +21,7 @@ num numPartBreakDTs     @ (header.ptrs.important_nums + 0x1E)
 	This information does seem to be accurate, and I'm saving it in case it
 	comes in handy, however as of current I will avoid using it for accuracy
 */
-/*num numLegA				@ (header.ptrs.hd_dll_af47af + 0x0);
+num numLegA				@ (header.ptrs.hd_dll_af47af + 0x0);
 num numUnk				@ (header.ptrs.hd_dll_af47af + 0x2);
 num numHeadA			@ (header.ptrs.hd_dll_af47af + 0x4);
 num numBodyA			@ (header.ptrs.hd_dll_af47af + 0x6);
@@ -32,7 +32,7 @@ num numWaistA			@ (header.ptrs.hd_dll_af47af + 0xA);
 num numMeleeW           @ (header.ptrs.hd_dll_af47af + 0xC);
 // Ghidra labels this _DAT_1e7414fc
 num numRangedW          @ (header.ptrs.hd_dll_af47af + 0xE);
-*/
+
 
 struct EquipmentCounts {
     u16 numLegA    @ (header.ptrs.hd_dll_af47af + 0x0);
