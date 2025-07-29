@@ -31,177 +31,249 @@ fn rangedNameWE (auto n) {
 	
 // TODO: Maybe replace these functions with enums?
 // It won't look as pretty but it'd make a bit more sense
-fn className (u8 n) {
-	str ret = "!!Unknown!!";
-
-	match (n) {
-		(0x00): ret = "Great Sword";
-		(0x01): ret = "Heavy Bowgun";
-		(0x02): ret = "Hammer";
-		(0x03): ret = "Lance";
-		(0x04): ret = "Sword and Shield";
-		(0x05): ret = "Light Bowgun";
-		(0x06): ret = "Dual Blades";
-		(0x07): ret = "Long Sword";
-		(0x08): ret = "Hunting Horn";
-		(0x09): ret = "Gunlance";
-		(0x0A): ret = "Bow";
-		(0x0B): ret = "Tonfa";
-		(0x0C): ret = "Switch Axe F";
-		(0x0D): ret = "Magnet Spike";
-	}
-
-	return ret;
+// Weapon class enum
+enum WeaponClass : u8 {
+	GreatSword = 0x00,
+	HeavyBowgun = 0x01,
+	Hammer = 0x02,
+	Lance = 0x03,
+	SwordAndShield = 0x04,
+	LightBowgun = 0x05,
+	DualBlades = 0x06,
+	LongSword = 0x07,
+	HuntingHorn = 0x08,
+	Gunlance = 0x09,
+	Bow = 0x0A,
+	Tonfa = 0x0B,
+	SwitchAxeF = 0x0C,
+	MagnetSpike = 0x0D
 };
 	
-fn elementName (u8 n) {
-	str ret = "!!Unknown!!";
-
-	match (n) {
-		(0x00): ret = "None";
-		(0x01): ret = "Fire";
-		(0x02): ret = "Water";
-		(0x03): ret = "Thunder";
-		(0x04): ret = "Dragon";
-		(0x05): ret = "Ice";
-		(0x06): ret = "Flame";
-		(0x07): ret = "Light";
-		(0x08): ret = "Thunder Pole";
-		(0x09): ret = "Tenshou";
-		(0x0A): ret = "Okiko";
-		(0x0B): ret = "Black Flame";
-		(0x0C): ret = "Kanade";
-		(0x0D): ret = "Darkness";
-		(0x0E): ret = "Crimson Demon";
-		(0x0F): ret = "Wind";
-		(0x10): ret = "Sound";
-		(0x11): ret = "Burning Zero";
-		(0x12): ret = "Emperor's Roar";
-	}
-	
-	return ret;
+// Element type enum
+enum ElementType : u8 {
+	None = 0x00,
+	Fire = 0x01,
+	Water = 0x02,
+	Thunder = 0x03,
+	Dragon = 0x04,
+	Ice = 0x05,
+	Flame = 0x06,
+	Light = 0x07,
+	ThunderPole = 0x08,
+	Tenshou = 0x09,
+	Okiko = 0x0A,
+	BlackFlame = 0x0B,
+	Kanade = 0x0C,
+	Darkness = 0x0D,
+	CrimsonDemon = 0x0E,
+	Wind = 0x0F,
+	Sound = 0x10,
+	BurningZero = 0x11,
+	EmperorsRoar = 0x12
 };
 	
-fn ailmentName (u8 n) {
-	str ret = "!!Unknown!!";
-
-	match (n) {
-		(0x00): ret = "None";
-		(0x01): ret = "Poison";
-		(0x02): ret = "Paralysis";
-		(0x03): ret = "Sleep";
-		(0x04): ret = "Blast";
-	}
-
-	return ret;
+// Ailment type enum
+enum AilmentType : u8 {
+	None = 0x00,
+	Poison = 0x01,
+	Paralysis = 0x02,
+	Sleep = 0x03,
+	Blast = 0x04
 };
 	
-fn eqType (u8 n) {
-	str ret = "!!Unknown!!";
-
-	match (n) {
-		(0x00): ret = "General";
-		(0x01): ret = "SP";
-		(0x02): ret = "Gou";
-		(0x04): ret = "Evolution";
-		(0x08): ret = "HC";
-		(0x12): ret = "Random Weapon";
-		(0x24): ret = "Ravi";
-		(0x40): ret = "G50";
-	}
-	
-	return ret;
+// Equipment type enum
+enum EquipType : u8 {
+	General = 0x00,
+	SP = 0x01,
+	Gou = 0x02,
+	Evolution = 0x04,
+	HC = 0x08,
+	RandomWeapon = 0x12,
+	Ravi = 0x24,
+	G50 = 0x40
 };
 
-fn weaponType (u32 n) {
-	str ret = "!!Unknown!!";
-
-	match (n) {
-		(0x00000000): ret = "General";
-		(0x00000800): ret = "Prayer LR";
-		(0x00000808): ret = "Prayer GR";
-		(0x00000200): ret = "Exotique";
-		(0x00001000): ret = "Zenith";
-		(0x00000002): ret = "Gou HR1";
-		(0x00000004): ret = "Gou HR2";
-		(0x00000010): ret = "Gou GR1";
-		(0x00000020): ret = "Gou GR2";
-		(0x00000100): ret = "Gou GR3";
-		(0x00000008): ret = "GR Gunner";
-		(0x08000000): ret = "GR Simple upgrade";
-		(0x00000041): ret = "Finess weapon";
-		(0x00004000): ret = "Ravi GR+";
-		(0x00000080): ret = "Tower";
-	}
-
-	return ret;
+// Bitfield structure for WeaponType analysis
+bitfield WeaponType {
+    finess_base : 1;        // bit 0
+    gou_hr1 : 1;           // bit 1
+    gou_hr2 : 1;           // bit 2
+    gr_gunner : 1;         // bit 3
+    gou_gr1 : 1;           // bit 4
+    gou_gr2 : 1;           // bit 5
+    finess_ext : 1;        // bit 6
+    tower : 1;             // bit 7
+    gou_gr3 : 1;           // bit 8
+    exotique : 1;          // bit 9
+    ravi_z : 1;            // bit 10
+    prayer_base : 1;       // bit 11
+    zenith : 1;            // bit 12
+    reserved_13 : 1 [[hidden]];       // bit 13
+    ravi_gr_plus : 1;      // bit 14
+    reserved_15_26 : 12 [[hidden]];   // bits 15-26
+    gr_simple_upgrade : 1; // bit 27
+    reserved_28_31 : 4 [[hidden]];    // bits 28-31
 };
 
-fn zenithSkill (u16 n){
-	str ret = "!!Unknown!!";
-
-	match (n){
-		(0x0000): ret = "None";
-		(0x0001): ret = "Skill Slot UP +1"; //1
-		(0x0002): ret = "Skill Slot UP +2"; //2
-		(0x0003): ret = "Skill Slot UP +3"; //3
-		(0x0004): ret = "Skill Slot UP +4"; //4
-		(0x0005): ret = "Skill Slot UP +5"; //5
-		(0x0006): ret = "Skill Slot UP +6"; //6
-		(0x0007): ret = "Skill Slot UP +7"; //7
-		(0x0008): ret = "Crit Conv UP +1"; //8
-		(0x0009): ret = "Crit Conv UP +2"; //9
-		(0x000A): ret = "Stylish Assault UP +1"; //10
-		(0x000B): ret = "Stylish Assault UP +2"; //11
-		(0x000C): ret = "Disolver UP"; //12
-		(0x000D): ret = "ThunderClad UP +1"; //13
-		(0x000E): ret = "ThunderClad UP +2"; //14
-		(0x000F): ret = "Ice Age UP"; //15
-		(0x0011): ret = "Earplug UP +1"; //16
-		(0x0012): ret = "Earplug UP +2"; //17
-		(0x0013): ret = "Earplug UP +3"; //18
-		(0x0014): ret = "Wind Res UP +1"; //19
-		(0x0015): ret = "Wind Res UP +2"; //20
-		(0x0016): ret = "Wind Res UP +3"; //21
-		(0x0017): ret = "Wind Res UP +4"; //22
-		(0x0018): ret = "Quake Res UP +1"; //23
-		(0x0019): ret = "Quake Res UP +2"; //24
-		(0x001A): ret = "Poison Res UP +1"; //25
-		(0x001B): ret = "Poison Res UP +2"; //26
-		(0x001C): ret = "Para Res UP +1"; //27
-		(0x001D): ret = "Para Res UP +2"; //28
-		(0x001E): ret = "Sleep Res UP +1"; //29
-		(0x001F): ret = "Sleep Res UP +2"; //30
-		(0x0020): ret = "Vampirism UP +1"; //31
-		(0x0021): ret = "Vampirism UP +2"; //32
-		(0x0022): ret = "DrugKnowledge UP"; //33
-		(0x0023): ret = "Assistance UP"; //34
-		(0x0024): ret = "Bullet Shaver UP +1"; //35
-		(0x0025): ret = "Bullet Shaver UP +2"; //36
-		(0x0026): ret = "Guard UP +1"; //37
-		(0x0027): ret = "Guard UP +2"; //38
-		(0x0028): ret = "Adaptation UP +1"; //39
-		(0x0029): ret = "Adapdation UP +2"; //40
-		(0x002A): ret = "Encourage UP +1"; //41
-		(0x002B): ret = "Encourage UP +2"; //42
-		(0x002C): ret = "Reflect UP +1"; //43
-		(0x002D): ret = "Reflect UP +2"; //44
-		(0x002E): ret = "Reflect UP +3"; //45
-		(0x002F): ret = "Stylish UP"; //46
-		(0x0030): ret = "Vigorous UP"; //47
-		(0x0031): ret = "Obscurity UP"; //48
-		(0x0032): ret = "Soul UP"; //49
-		(0x0033): ret = "Ceaseless UP"; //50
-		(0x0034): ret = "Rush UP"; //51
-
-	}
-	return ret;
+fn weaponTypeDecoder(WeaponType wt) {
+    str result = "";
+    bool first = true;
+    
+    // Gestion spéciale pour Prayer GR (combinaison de bits 11 + 3)
+    if (wt.prayer_lr && wt.gr_gunner) {
+        result += "Prayer GR";
+        first = false;
+    } else {
+        // Traitement individuel si pas Prayer GR
+        if (wt.prayer_lr) {
+            if (!first) result += " | ";
+            result += "Prayer LR";
+            first = false;
+        }
+        if (wt.gr_gunner) {
+            if (!first) result += " | ";
+            result += "GR Gunner";
+            first = false;
+        }
+    }
+    
+    if (wt.gou_hr1) {
+        if (!first) result += " | ";
+        result += "Gou HR1";
+        first = false;
+    }
+    if (wt.gou_hr2) {
+        if (!first) result += " | ";
+        result += "Gou HR2";
+        first = false;
+    }
+    if (wt.gou_gr1) {
+        if (!first) result += " | ";
+        result += "Gou GR1";
+        first = false;
+    }
+    if (wt.gou_gr2) {
+        if (!first) result += " | ";
+        result += "Gou GR2";
+        first = false;
+    }
+    if (wt.finess_weapon) {
+        if (!first) result += " | ";
+        result += "Finess weapon";
+        first = false;
+    }
+    if (wt.tower) {
+        if (!first) result += " | ";
+        result += "Tower";
+        first = false;
+    }
+    if (wt.gou_gr3) {
+        if (!first) result += " | ";
+        result += "Gou GR3";
+        first = false;
+    }
+    if (wt.exotique) {
+        if (!first) result += " | ";
+        result += "Exotique";
+        first = false;
+    }
+    if (wt.zenith) {
+        if (!first) result += " | ";
+        result += "Zenith";
+        first = false;
+    }
+    if (wt.ravi_gr_plus) {
+        if (!first) result += " | ";
+        result += "Ravi GR+";
+        first = false;
+    }
+    if (wt.gr_simple_upgrade) {
+        if (!first) result += " | ";
+        result += "GR Simple upgrade";
+        first = false;
+    }
+    
+    if (result == "") {
+        result = "General";
+    }
+    
+    return result;
 };
-	
+
+// Fonction utilitaire pour détecter Prayer GR
+fn isPrayerGR(WeaponType wt) {
+    return (wt.prayer_lr && wt.gr_gunner);
+};
+
+
+enum Length : u32 {
+	Medium = 0x00000000,
+	Short = 0x00000001,
+	VeryShort = 0x00000002,
+	Long = 0x00000003,
+	VeryLong = 0x00000004
+};
+
+// Zenith skill enum
+enum ZenithSkill : u16 {
+	None = 0x0000,
+	SkillSlotUP1 = 0x0001,
+	SkillSlotUP2 = 0x0002,
+	SkillSlotUP3 = 0x0003,
+	SkillSlotUP4 = 0x0004,
+	SkillSlotUP5 = 0x0005,
+	SkillSlotUP6 = 0x0006,
+	SkillSlotUP7 = 0x0007,
+	CritConvUP1 = 0x0008,
+	CritConvUP2 = 0x0009,
+	StylishAssaultUP1 = 0x000A,
+	StylishAssaultUP2 = 0x000B,
+	DisolverUP = 0x000C,
+	ThunderCladUP1 = 0x000D,
+	ThunderCladUP2 = 0x000E,
+	IceAgeUP = 0x000F,
+	EarplugUP1 = 0x0011,
+	EarplugUP2 = 0x0012,
+	EarplugUP3 = 0x0013,
+	WindResUP1 = 0x0014,
+	WindResUP2 = 0x0015,
+	WindResUP3 = 0x0016,
+	WindResUP4 = 0x0017,
+	QuakeResUP1 = 0x0018,
+	QuakeResUP2 = 0x0019,
+	PoisonResUP1 = 0x001A,
+	PoisonResUP2 = 0x001B,
+	ParaResUP1 = 0x001C,
+	ParaResUP2 = 0x001D,
+	SleepResUP1 = 0x001E,
+	SleepResUP2 = 0x001F,
+	VampirismUP1 = 0x0020,
+	VampirismUP2 = 0x0021,
+	DrugKnowledgeUP = 0x0022,
+	AssistanceUP = 0x0023,
+	BulletShaverUP1 = 0x0024,
+	BulletShaverUP2 = 0x0025,
+	GuardUP1 = 0x0026,
+	GuardUP2 = 0x0027,
+	AdaptationUP1 = 0x0028,
+	AdaptationUP2 = 0x0029,
+	EncourageUP1 = 0x002A,
+	EncourageUP2 = 0x002B,
+	ReflectUP1 = 0x002C,
+	ReflectUP2 = 0x002D,
+	ReflectUP3 = 0x002E,
+	StylishUP = 0x002F,
+	VigorousUP = 0x0030,
+	ObscurityUP = 0x0031,
+	SoulUP = 0x0032,
+	CeaselessUP = 0x0033,
+	RushUP = 0x0034
+};
+
 struct MeleeItem {
 	u16 modelId [[color("0088FF")]];
 	u8 rarity [[format("plusone"), color("22FF22")]];
-	u8 classId [[format("className"), color("0088FF")]];
+	WeaponClass classId [[color("0088FF")]];
 	
 	u32 zennyCost [[
 		comment("Seems to be twice what Ferias reports"), 
@@ -219,10 +291,10 @@ struct MeleeItem {
 	u16 defense [[color("22FF22")]];
 	s8 affinity [[color("22FF22")]];
 
-	u8 elementId [[format("elementName"), color("00FF00")]];
+	ElementType elementId [[color("00FF00")]];
 	u8 eleDamage [[format("timesten"), color("00FF00")]];
 
-	u8 ailmentId [[format("ailmentName"), color("00FF00")]];
+	AilmentType ailmentId [[color("00FF00")]];
 	u8 ailDamage [[format("timesten"), color("00FF00")]];
 
 	u8 slots [[color("00FF00")]];
@@ -247,20 +319,18 @@ struct MeleeItem {
 		color("FF0000")
 	]]; 
 
-	u8 Equip_Type [[
+	EquipType Equip_Type [[
 		name("Equip Type"),
-		format("eqType"), 
 		color("FFFF00")
 	]]; 
 
 	u8 unk1B;
-	u32 Length;
-	u32 Weapon_type [[
-		name("Weapon Type"),
-		format("weaponType"),
-		comment("it define if its zenith, prayer, grank, exotic, gou, etc..."), 
-		color("FF0000")
-		]];
+	Length Length;
+    WeaponType weapon_type [[
+        name("Weapon Type"),
+        comment("Bitfield defining weapon categories: zenith, prayer, grank, exotic, gou, etc..."), 
+        color("FF0000")
+    ]];
 	
 	u16 Visual_effects [[
 		comment("Seems to be related to weapon visual effects"),
@@ -275,74 +345,136 @@ struct MeleeItem {
 	u8 unk2A; 
 	u8 zeroF [[comment("Always 0F?"), color("FF0000")]];
 	u32 Unk2C [[comment("Free Params?"), color("FF0000")]]; 
-	u16 zenithSkill[[
-		name("Zenith Skills"),
-		format("zenithSkill")
+	ZenithSkill zenithSkill[[
+		name("Zenith Skills")
 	]];
 	padding[2];
 };
 
-fn reload (u8 n) {
-	str ret = "!!Unknown!!";
 
-	match (n) {
-		(0x00): ret = "Very Slow";
-		(0x01): ret = "Slow";
-		(0x02): ret = "Normal";
-		(0x03): ret = "Fast";
-		(0x04): ret = "Very Fast";
-	}
-	return ret;
+// Reload speed enum
+enum ReloadSpeed : u8 {
+	VerySlow = 0x00,
+	Slow = 0x01,
+	Normal = 0x02,
+	Fast = 0x03,
+	VeryFast = 0x04
 };
 
-fn recoil (u8 n) {
-	str ret = "!!Unknown!!";
-
-	match (n) {
-		(0x00): ret = "Very High";
-		(0x01): ret = "High";
-		(0x02): ret = "Normal";
-		(0x03): ret = "Low";
-		(0x04): ret = "Very Low";
-	}
-	return ret;
+// Recoil level enum
+enum RecoilLevel : u8 {
+	VeryHigh = 0x00,
+	High = 0x01,
+	Normal = 0x02,
+	Low = 0x03,
+	VeryLow = 0x04
 };
+
+bitfield BulletTypes {
+    normal_lv1    : 1;   // Bit 0  - LV1 通常弾 (Normal Lv1)
+    normal_lv2    : 1;   // Bit 1  - LV2 通常弾 (Normal Lv2)
+    normal_lv3    : 1;   // Bit 2  - LV3 通常弾 (Normal Lv3)
+    pierce_lv1    : 1;   // Bit 3  - LV1 貫通弾 (Pierce Lv1)
+    pierce_lv2    : 1;   // Bit 4  - LV2 貫通弾 (Pierce Lv2)
+    pierce_lv3    : 1;   // Bit 5  - LV3 貫通弾 (Pierce Lv3)
+    spread_lv1    : 1;   // Bit 6  - LV1 散弾 (Spread Lv1)
+    spread_lv2    : 1;   // Bit 7  - LV2 散弾 (Spread Lv2)
+    spread_lv3    : 1;   // Bit 8  - LV3 散弾 (Spread Lv3)
+    crag_lv1      : 1;   // Bit 9  - LV1 徹甲榴弾 (Crag Lv1)
+    crag_lv2      : 1;   // Bit 10 - LV2 徹甲榴弾 (Crag Lv2)
+    crag_lv3      : 1;   // Bit 11 - LV3 徹甲榴弾 (Crag Lv3)
+    cluster_lv1   : 1;   // Bit 12 - LV1 拡散弾 (Cluster Lv1)
+    cluster_lv2   : 1;   // Bit 13 - LV2 拡散弾 (Cluster Lv2)
+    cluster_lv3   : 1;   // Bit 14 - LV3 拡散弾 (Cluster Lv3)
+    fire          : 1;   // Bit 15 - 火炎弾 (Fire Shot)
+    water         : 1;   // Bit 16 - 水冷弾 (Water Shot)
+    thunder       : 1;   // Bit 17 - 電撃弾 (Thunder Shot)
+    ice           : 1;   // Bit 18 - 氷結弾 (Ice Shot)
+    dragon        : 1;   // Bit 19 - 滅龍弾 (Dragon Shot)
+    recovery_lv1  : 1;   // Bit 20 - LV1 回復弾 (Recovery Lv1)
+    recovery_lv2  : 1;   // Bit 21 - LV2 回復弾 (Recovery Lv2)
+    poison_lv1    : 1;   // Bit 22 - LV1 毒弾 (Poison Lv1)
+    poison_lv2    : 1;   // Bit 23 - LV2 毒弾 (Poison Lv2)
+    paralysis_lv1 : 1;   // Bit 24 - LV1 麻痺弾 (Paralysis Lv1)
+    paralysis_lv2 : 1;   // Bit 25 - LV2 麻痺弾 (Paralysis Lv2)
+    sleep_lv1     : 1;   // Bit 26 - LV1 睡眠弾 (Sleep Lv1)
+    sleep_lv2     : 1;   // Bit 27 - LV2 睡眠弾 (Sleep Lv2)
+    tranquilizer  : 1;   // Bit 28 - 捕獲用麻酔弾 (Tranquilizer Shot)
+    paint         : 1;   // Bit 29 - ペイント弾 (Paint Shot)
+    demon         : 1;   // Bit 30 - 鬼人弾 (Demon Shot)
+    armor         : 1;   // Bit 31 - 硬化弾 (Armor Shot)
+};
+
+bitfield AmmoQuantity {
+    normal_lv1_qty    : 1;   // Bit 0  - LV1 通常弾 (Normal Lv1)
+    normal_lv2_qty    : 1;   // Bit 1  - LV2 通常弾 (Normal Lv2)
+    normal_lv3_qty    : 1;   // Bit 2  - LV3 通常弾 (Normal Lv3)
+    pierce_lv1_qty    : 1;   // Bit 3  - LV1 貫通弾 (Pierce Lv1)
+    pierce_lv2_qty    : 1;   // Bit 4  - LV2 貫通弾 (Pierce Lv2)
+    pierce_lv3_qty    : 1;   // Bit 5  - LV3 貫通弾 (Pierce Lv3)
+    spread_lv1_qty    : 1;   // Bit 6  - LV1 散弾 (Spread Lv1)
+    spread_lv2_qty    : 1;   // Bit 7  - LV2 散弾 (Spread Lv2)
+    spread_lv3_qty    : 1;   // Bit 8  - LV3 散弾 (Spread Lv3)
+    crag_lv1_qty      : 1;   // Bit 9  - LV1 徹甲榴弾 (Crag Lv1)
+    crag_lv2_qty      : 1;   // Bit 10 - LV2 徹甲榴弾 (Crag Lv2)
+    crag_lv3_qty      : 1;   // Bit 11 - LV3 徹甲榴弾 (Crag Lv3)
+    cluster_lv1_qty   : 1;   // Bit 12 - LV1 拡散弾 (Cluster Lv1)
+    cluster_lv2_qty   : 1;   // Bit 13 - LV2 拡散弾 (Cluster Lv2)
+    cluster_lv3_qty   : 1;   // Bit 14 - LV3 拡散弾 (Cluster Lv3)
+    fire_qty          : 1;   // Bit 15 - 火炎弾 (Fire Shot)
+    water_qty         : 1;   // Bit 16 - 水冷弾 (Water Shot)
+    thunder_qty       : 1;   // Bit 17 - 電撃弾 (Thunder Shot)
+    ice_qty           : 1;   // Bit 18 - 氷結弾 (Ice Shot)
+    dragon_qty        : 1;   // Bit 19 - 滅龍弾 (Dragon Shot)
+    recovery_lv1_qty  : 1;   // Bit 20 - LV1 回復弾 (Recovery Lv1)
+    recovery_lv2_qty  : 1;   // Bit 21 - LV2 回復弾 (Recovery Lv2)
+    poison_lv1_qty    : 1;   // Bit 22 - LV1 毒弾 (Poison Lv1)
+    poison_lv2_qty    : 1;   // Bit 23 - LV2 毒弾 (Poison Lv2)
+    paralysis_lv1_qty : 1;   // Bit 24 - LV1 麻痺弾 (Paralysis Lv1)
+    paralysis_lv2_qty : 1;   // Bit 25 - LV2 麻痺弾 (Paralysis Lv2)
+    sleep_lv1_qty     : 1;   // Bit 26 - LV1 睡眠弾 (Sleep Lv1)
+    sleep_lv2_qty     : 1;   // Bit 27 - LV2 睡眠弾 (Sleep Lv2)
+    tranquilizer_qty  : 1;   // Bit 28 - 捕獲用麻酔弾 (Tranquilizer Shot)
+    paint_qty         : 1;   // Bit 29 - ペイント弾 (Paint Shot)
+    demon_qty         : 1;   // Bit 30 - 鬼人弾 (Demon Shot)
+    armor_qty         : 1;   // Bit 31 - 硬化弾 (Armor Shot)
+} [[color("FF8080")]];
 	
 struct RangedItem {
 	u16 modelId;
 	u8 rarity [[format("plusone")]];
 	u8 maxSlotsMaybe;
-	u8 classId [[format("className")]];
+	WeaponClass classId;
 	u8 unk05;
-	u8 eq [[
+	EquipType eq [[
 		name("Equip Type"),
-		format("eqType"), 
 		color("FFFF00")]];
 	u8 unk07;
 	u8 unk08;
 	u8 unk09;
 	u8 unk11;
 	u8 unk12;
-	u32 Weapon_type[[
+	WeaponType Weapon_type[[
 		name("Weapon Type"),
-		format("weaponType"),
 		comment("it define if its zenith, prayer, grank, exotic, gou, etc...")
 	]]; 
 	u32 unk10;
 	u32 zennyCost;
 	u16 rawDamage;
 	u16 defense;
-	u8 recoil[[format("recoil")]];
+	RecoilLevel recoil;
 	u8 slots;
 	s8 affinity;
 	u8 sortOrderMaybe;
 	u8 Weapon_attribute [[comment("define gunners shot?")]];
-	u8 elementId [[format("elementName")]];
+	ElementType elementId;
 	u8 eleDamage [[format("timesten")]];
-	u8 reload[[format("reload")]];
-	u16 unk24;
-	u16 unk26;
-	u32 bullet; 
+	ReloadSpeed reload;
+	u32 unk24;
+	BulletTypes bullet [[
+        name("Bullet Types Supported"),
+        comment("Bitfield indicating which ammunition types this bowgun can use")
+    ]];
 	u16 Tower_G50_Param_ID[[
 		name("Tower/G50 Param ID?")
 	]];
@@ -352,9 +484,8 @@ struct RangedItem {
 	u8 unk34;
 	u8 zeroF;
 	u16 unk38;
-	u16 zenithSkill[[
-		name("Zenith Skills"),
-		format("zenithSkill")
+	ZenithSkill zenithSkill[[
+		name("Zenith Skills")
 	]];
 	u32 unk42[[hidden]];
 };
@@ -393,6 +524,7 @@ struct WeaponRanged {
   WeaponName        names        [RangedQuantity] @ header.ptrs.rangedWeaponNames [[name("Names")]];
   WeaponDescription descriptions [RangedQuantity] @ header.ptrs.rangedWeaponDesc  [[name("Descriptions")]];
 };
+
 
 struct Weapons {
   WeaponMelee  melee  @ header.ptrs.meleeWeapons  [[name("Melee")]];
