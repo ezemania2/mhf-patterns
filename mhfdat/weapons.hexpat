@@ -82,15 +82,15 @@ enum AilmentType : u8 {
 };
 	
 // Equipment type enum
-enum EquipType : u8 {
-	General = 0x00,
-	SP = 0x01,
-	Gou = 0x02,
-	Evolution = 0x04,
-	HC = 0x08,
-	RandomWeapon = 0x12,
-	Ravi = 0x24,
-	G50 = 0x40
+bitfield EquipType {
+    sp : 1;                 
+    gou : 1;                
+    evolution : 1;         
+    hc : 1;                 
+    random_weapon : 1; 
+    ravi : 1;           	
+    g50 : 1;                
+    unk_7 : 1; // 0x08
 };
 
 // Bitfield structure for WeaponType analysis
@@ -108,11 +108,25 @@ bitfield WeaponType {
     ravi_z : 1;            // bit 10
     prayer_base : 1;       // bit 11
     zenith : 1;            // bit 12
-    reserved_13 : 1 [[hidden]];       // bit 13
+    unk_13 : 1 [[hidden]];       // bit 13
     ravi_gr_plus : 1;      // bit 14
-    reserved_15_26 : 12 [[hidden]];   // bits 15-26
+    unk_15 : 1 [[hidden]]; // bit 15
+    unk_16 : 1 [[hidden]]; // bit 16
+    unk_17 : 1 [[hidden]]; // bit 17
+    unk_18 : 1 [[hidden]]; // bit 18
+    unk_19 : 1 [[hidden]]; // bit 19
+    unk_20 : 1 [[hidden]]; // bit 20
+    unk_21 : 1 [[hidden]]; // bit 21
+    unk_22 : 1 [[hidden]]; // bit 22
+    unk_23 : 1 [[hidden]]; // bit 23
+    unk_24 : 1 [[hidden]]; // bit 24
+    unk_25 : 1 [[hidden]]; // bit 25
+    unk_26 : 1 [[hidden]]; // bit 26
     gr_simple_upgrade : 1; // bit 27
-    reserved_28_31 : 4 [[hidden]];    // bits 28-31
+    unk_28 : 1 [[hidden]]; // bit 28
+    unk_29 : 1 [[hidden]]; // bit 29
+    unk_30 : 1 [[hidden]]; // bit 30
+    unk_31 : 1 [[hidden]]; // bit 31
 };
 
 fn weaponTypeDecoder(WeaponType wt) {
@@ -405,40 +419,41 @@ bitfield BulletTypes {
     armor         : 1;   // Bit 31 - 硬化弾 (Armor Shot)
 };
 
-bitfield AmmoQuantity {
-    normal_lv1_qty    : 1;   // Bit 0  - LV1 通常弾 (Normal Lv1)
-    normal_lv2_qty    : 1;   // Bit 1  - LV2 通常弾 (Normal Lv2)
-    normal_lv3_qty    : 1;   // Bit 2  - LV3 通常弾 (Normal Lv3)
-    pierce_lv1_qty    : 1;   // Bit 3  - LV1 貫通弾 (Pierce Lv1)
-    pierce_lv2_qty    : 1;   // Bit 4  - LV2 貫通弾 (Pierce Lv2)
-    pierce_lv3_qty    : 1;   // Bit 5  - LV3 貫通弾 (Pierce Lv3)
-    spread_lv1_qty    : 1;   // Bit 6  - LV1 散弾 (Spread Lv1)
-    spread_lv2_qty    : 1;   // Bit 7  - LV2 散弾 (Spread Lv2)
-    spread_lv3_qty    : 1;   // Bit 8  - LV3 散弾 (Spread Lv3)
-    crag_lv1_qty      : 1;   // Bit 9  - LV1 徹甲榴弾 (Crag Lv1)
-    crag_lv2_qty      : 1;   // Bit 10 - LV2 徹甲榴弾 (Crag Lv2)
-    crag_lv3_qty      : 1;   // Bit 11 - LV3 徹甲榴弾 (Crag Lv3)
-    cluster_lv1_qty   : 1;   // Bit 12 - LV1 拡散弾 (Cluster Lv1)
-    cluster_lv2_qty   : 1;   // Bit 13 - LV2 拡散弾 (Cluster Lv2)
-    cluster_lv3_qty   : 1;   // Bit 14 - LV3 拡散弾 (Cluster Lv3)
-    fire_qty          : 1;   // Bit 15 - 火炎弾 (Fire Shot)
-    water_qty         : 1;   // Bit 16 - 水冷弾 (Water Shot)
-    thunder_qty       : 1;   // Bit 17 - 電撃弾 (Thunder Shot)
-    ice_qty           : 1;   // Bit 18 - 氷結弾 (Ice Shot)
-    dragon_qty        : 1;   // Bit 19 - 滅龍弾 (Dragon Shot)
-    recovery_lv1_qty  : 1;   // Bit 20 - LV1 回復弾 (Recovery Lv1)
-    recovery_lv2_qty  : 1;   // Bit 21 - LV2 回復弾 (Recovery Lv2)
-    poison_lv1_qty    : 1;   // Bit 22 - LV1 毒弾 (Poison Lv1)
-    poison_lv2_qty    : 1;   // Bit 23 - LV2 毒弾 (Poison Lv2)
-    paralysis_lv1_qty : 1;   // Bit 24 - LV1 麻痺弾 (Paralysis Lv1)
-    paralysis_lv2_qty : 1;   // Bit 25 - LV2 麻痺弾 (Paralysis Lv2)
-    sleep_lv1_qty     : 1;   // Bit 26 - LV1 睡眠弾 (Sleep Lv1)
-    sleep_lv2_qty     : 1;   // Bit 27 - LV2 睡眠弾 (Sleep Lv2)
-    tranquilizer_qty  : 1;   // Bit 28 - 捕獲用麻酔弾 (Tranquilizer Shot)
-    paint_qty         : 1;   // Bit 29 - ペイント弾 (Paint Shot)
-    demon_qty         : 1;   // Bit 30 - 鬼人弾 (Demon Shot)
-    armor_qty         : 1;   // Bit 31 - 硬化弾 (Armor Shot)
-} [[color("FF8080")]];
+struct BulletSet {
+    u8 normal_lv1_capacity;    
+    u8 normal_lv2_capacity;     
+    u8 normal_lv3_capacity;     
+    u8 pierce_lv1_capacity;     
+    u8 pierce_lv2_capacity;     
+    u8 pierce_lv3_capacity;     
+    u8 spread_lv1_capacity;     
+    u8 spread_lv2_capacity;     
+    u8 spread_lv3_capacity;     
+    u8 crag_lv1_capacity;       
+    u8 crag_lv2_capacity;       
+    u8 crag_lv3_capacity;       
+    u8 cluster_lv1_capacity;    
+    u8 cluster_lv2_capacity;    
+    u8 cluster_lv3_capacity;    
+    u8 fire_capacity;           
+    u8 water_capacity;          
+    u8 thunder_capacity;        
+    u8 ice_capacity;            
+    u8 dragon_capacity;         
+    u8 recovery_lv1_capacity;   
+    u8 recovery_lv2_capacity;   
+    u8 poison_lv1_capacity;     
+    u8 poison_lv2_capacity;     
+    u8 paralysis_lv1_capacity;  
+    u8 paralysis_lv2_capacity;  
+    u8 sleep_lv1_capacity;      
+    u8 sleep_lv2_capacity;      
+    u8 tranquilizer_capacity;   
+    u8 paint_capacity;          
+    u8 demon_capacity;          
+    u8 armor_capacity;
+    padding[68];
+}; 
 	
 struct RangedItem {
 	u16 modelId;
@@ -523,6 +538,7 @@ struct WeaponRanged {
  	RangedItem        data         [RangedQuantity] @ header.ptrs.rangedWeapons     [[name("Data")]];
   WeaponName        names        [RangedQuantity] @ header.ptrs.rangedWeaponNames [[name("Names")]];
   WeaponDescription descriptions [RangedQuantity] @ header.ptrs.rangedWeaponDesc  [[name("Descriptions")]];
+  BulletSet         bulletSet    [44] @ header.ptrs.BulletSets         [[name("Bullet Set")]];
 };
 
 
