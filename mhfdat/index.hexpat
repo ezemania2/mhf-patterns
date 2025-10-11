@@ -59,3 +59,7 @@
 #ifdef __CONSTANTS
 #include <mhfdat/constants.hexpat>
 #endif
+
+#ifdef __AUTOMATIC_SKILLS
+#include <mhfdat/automaticSkills.hexpat>
+#endif

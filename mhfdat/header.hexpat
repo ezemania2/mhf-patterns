@@ -99,8 +99,8 @@ struct ptr_table {
     unk_ptr hd_dll_af4e0f;
     unk_ptr hd_dll_af4e3a;
 
-    // + 0x120
-    ptr carveItemDrops          [[name("Carve Drop Data Pointer")]];
+    
+    ptr carveItemDrops          [[name("Carve Drop Data Pointer")]]; // + 0x120
     ptr partBreakItemDrops      [[name("Part Break Drop Data Pointer")]];
     unk_ptr hd_dll_af4ec1;
     ptr itemDesc                [[name("Item Descriptions Pointer")]];
@@ -231,7 +231,7 @@ struct ptr_table {
     unk_ptr hd_dll_af5c06;
     unk_ptr hd_dll_af5c0c;      // @ 0x310
     unk_ptr hd_dll_af5c12;
-    unk_ptr hd_dll_af5b9d;
+    ptr skillValues;
     unk_ptr hd_dll_af5c18;
     unk_ptr hd_dll_af5c1e;      // @ 0x320
     unk_ptr hd_dll_af5bd0;
@@ -362,7 +362,7 @@ struct ptr_table {
     unk_ptr hd_dll_af6434;      // @ 0x510
     unk_ptr hd_dll_af643a;
     unk_ptr hd_dll_af6440;
-    ptr GunTypeTable            [[name("Gun Type Table Pointer")]];      // @ 0x510
+    ptr GunTypeTable            [[name("Gun Type Table Pointer")]];
     unk_ptr hd_dll_af647d;      // @ 0x520
     unk_ptr hd_dll_af6588;
     unk_ptr hd_dll_af658e;
@@ -404,17 +404,17 @@ struct ptr_table {
     unk_ptr hd_dll_af703a;
     unk_ptr hd_dll_af66d6;
     unk_ptr hd_dll_af66dc;      // @ 0x5C0
-    ptr Hammer_Params_pointer [[name("Hammer Params Pointer")]];
-    ptr Lance_Params_pointer [[name("Lance Params Pointer")]];
     ptr GreatSword_Params_pointer [[name("Great Sword Params Pointer")]];
-    ptr Gunlance_Params_pointer [[name("Gunlance Params Pointer")]];      // @ 0x5D0
-    ptr DualBlades_Params_pointer [[name ("Dual Blades Params Pointer")]];
-    ptr HeavyBowgun_Params_pointer [[name("Heavy Bowgun Params Pointer")]];
-    ptr SwordAndShield_Params_pointer [[name("Sword and Shield Params Pointer")]];
-    ptr Bow_Params_pointer [[name ("Bow Params Pointer")]];      // @ 0x5E0
-    ptr Longsword_Params_pointer [[name("Longsword Params Pointer")]];
-    ptr HuntingHorn_Params_pointer [[name("Hunting Horn Params Pointer")]];
+    ptr HeavyBowGun_Params_pointer [[name("Heavy Bowgun Params Pointer")]];
+    ptr Hammer_Params_pointer [[name("Hammer Params Pointer")]];
+    ptr Lance_Params_pointer [[name("Lance Params Pointer")]];      // @ 0x5D0
+    ptr SwordAndShield_Params_pointer [[name ("Sword and Shield Params Pointer")]];
     ptr LightBowgun_Params_pointer [[name("Light Bowgun Params Pointer")]];
+    ptr DualBlades_Params_pointer [[name("Dual Blades Params Pointer")]];
+    ptr LongSword_Params_pointer [[name ("Longsword Params Pointer")]];      // @ 0x5E0
+    ptr HuntingHorn_Params_pointer [[name("Hunting Horn Params Pointer")]];
+    ptr GunLance_Params_pointer [[name("Gunlance Params Pointer")]];
+    ptr Bow_Params_pointer [[name("Bow Params Pointer")]];
 
     // @ 0x5F0
     ptr weaponGRForging         [[name("G-Rank Weapon Forging Pointer")]];
@@ -554,7 +554,7 @@ struct ptr_table {
     unk_ptr hd_dll_af79d0;
     unk_ptr hd_dll_af7a00;
     unk_ptr hd_dll_af7a8e;      // @ 0x800
-    unk_ptr hd_dll_af7a94;
+    ptr AutomaticSkillsTable    [[name("Automatic Skills Table Pointer")]];
     unk_ptr hd_dll_af7a9a;
     unk_ptr hd_dll_af7aa0;
     unk_ptr hd_dll_af7aa6;      // @ 0x810
@@ -766,11 +766,11 @@ struct ptr_table {
     unk_ptr hd_dll_af4709;
     unk_ptr hd_dll_af8f07;
     unk_ptr hd_dll_af8f0d;
-    unk_ptr hd_dll_af8f13;      // @ 0xB10
+    ptr Road_Cat_Item_Shop_Pointer [[name("Road Cat Item Shop Pointer")]];      // @ 0xB10
     unk_ptr hd_dll_af8f19;
     unk_ptr hd_dll_af4729;
     unk_ptr hd_dll_af8f1f;
-    unk_ptr hd_dll_af8f25;      // @ 0xB20
+    ptr Road_Monster_Point_Value_Pointer [[name("Road Monster Point Value Pointer")]];      // @ 0xB20
     unk_ptr hd_dll_af8f2b;
     unk_ptr hd_dll_af8f31;
 

@@ -13,5 +13,6 @@
 //#define __WEAPONS 1
 //#define __DECOID 1
 //#define __CONSTANTS 1
+//#define __AUTOMATIC_SKILLS 1
 
 #include <mhfdat/index.hexpat>
