@@ -364,12 +364,12 @@ struct ptr_table {
     unk_ptr hd_dll_af6440;
     ptr GunTypeTable            [[name("Gun Type Table Pointer")]];
     unk_ptr hd_dll_af647d;      // @ 0x520
-    unk_ptr hd_dll_af6588;
+    ptr my_mission_data         [[name("My Mission Data Pointer")]];
     unk_ptr hd_dll_af658e;
     unk_ptr hd_dll_af659a;
     unk_ptr hd_dll_af65ea;      // @ 0x530
     unk_ptr hd_dll_af65f0;
-    unk_ptr hd_dll_af65f6;
+    ptr my_mission_objective    [[name("My Mission Objective Pointer")]];
     unk_ptr hd_dll_af65fc;
     unk_ptr hd_dll_af6602;      // @ 0x540
     unk_ptr hd_dll_af6608;

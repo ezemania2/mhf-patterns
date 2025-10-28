@@ -14,5 +14,6 @@
 //#define __DECOID 1
 //#define __CONSTANTS 1
 //#define __AUTOMATIC_SKILLS 1
+//#define __MY_MISSION_DATA 1
 
 #include <mhfdat/index.hexpat>

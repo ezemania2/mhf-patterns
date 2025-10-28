@@ -63,3 +63,7 @@
 #ifdef __AUTOMATIC_SKILLS
 #include <mhfdat/automaticSkills.hexpat>
 #endif
+
+#ifdef __MY_MISSION_DATA
+#include <mhfdat/my_mission_data.hexpat>
+#endif
