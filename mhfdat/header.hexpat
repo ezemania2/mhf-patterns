@@ -807,7 +807,7 @@ struct ptr_table {
     unk_ptr hd_dll_af9402;      // @ 0xBA0
     unk_ptr hd_dll_af9450;
     unk_ptr hd_dll_af9408;
-    unk_ptr hd_dll_af59bf;      //Seems to be weapon related
+    ptr CombineShop [[name("Combine Shop Pointer")]];
 };
 
 struct mhfdat_header {
