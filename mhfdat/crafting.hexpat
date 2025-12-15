@@ -289,6 +289,44 @@ struct DecoShop {
     u8 ItemUnlockFlag4;
 } [[single_color]];
 
+struct TowerG50WeaponParams {
+    u16 modelId;          
+    u8  sharpness_id;         
+    u8  max_sharpness;          
+    u16 weaponRaw;         
+    u8  elementId;         
+    u8  eleDamage;         
+    u8  ailmentId;         
+    u8  ailDamage;         
+    u16 defense;         
+    u8  chance_rate [[comment("Chance to get upgraded on low cost upgrade?")]];         
+    u8  unk_0d;         
+    u16 upgradePath;      
+};
+
+struct WeaponTypeParams2 {
+	ptr dataptr [[hidden]];             
+    TowerG50WeaponParams g50LevelStats[while(std::mem::read_unsigned($, 2) != 0xFFFF)] @ dataptr;};
+
+struct WeaponTypeParams {
+    WeaponTypeParams2 greatSwordParams [130] @ header.ptrs.GreatSword_Params_pointer [[name("Tower/G50 Params - Sword and Shield")]];
+	WeaponTypeParams2 heavyBowgunParams  [130] @ header.ptrs.HeavyBowGun_Params_pointer [[name("Tower/G50 Params - Dual Blades")]];
+	WeaponTypeParams2 hammerParams  [130] @ header.ptrs.Hammer_Params_pointer [[name("Tower/G50 Params - Great Sword")]];
+	WeaponTypeParams2 lanceParams  [130] @ header.ptrs.Lance_Params_pointer [[name("Tower/G50 Params - Long Sword")]];
+	WeaponTypeParams2 swordAndShieldParams  [130] @ header.ptrs.SwordAndShield_Params_pointer [[name("Tower/G50 Params - Lance")]];
+	WeaponTypeParams2 lightBowgunParams  [130] @ header.ptrs.LightBowgun_Params_pointer [[name("Tower/G50 Params - Gunlance")]];
+	WeaponTypeParams2 dualBladesParams  [130] @ header.ptrs.DualBlades_Params_pointer [[name("Tower/G50 Params - Hammer")]];
+	WeaponTypeParams2 longswordParams  [130] @ header.ptrs.LongSword_Params_pointer [[name("Tower/G50 Params - Hunting Horn")]];
+	WeaponTypeParams2 huntingHornParams  [130] @ header.ptrs.HuntingHorn_Params_pointer [[name("Tower/G50 Params - Heavy Bow Gun")]];
+	WeaponTypeParams2 gunlanceParams  [130] @ header.ptrs.GunLance_Params_pointer [[name("Tower/G50 Params - Light Bow Gun")]];
+	WeaponTypeParams2 bowParams  [130] @ header.ptrs.Bow_Params_pointer [[name("Tower/G50 Params - Bow")]];
+	WeaponTypeParams2 tonfaParams  [130] @ header.ptrs.Tonfa_Params_pointer [[name("Tower/G50 Params - Tonfa")]];
+	WeaponTypeParams2 switchAxeParams [130] @ header.ptrs.SwitchAxe_Params [[name("Tower/G50 Params - Switch Axe")]];
+	WeaponTypeParams2 magnetspikeParams [130] @ header.ptrs.Magnetspike_params_pointer [[name("Tower/G50 Params - Magnet Spike")]];
+};
+
+WeaponTypeParams motionValues @ header.ptrs.Hammer_Params_pointer [[name("G50/Tower Params")]];
+
 DecoShop decoShop[while(std::mem::read_unsigned($, 4))] @ header.ptrs.DecoShop;
 DecoShop grankDecoShop[while(std::mem::read_unsigned($, 4))] @ header.ptrs.GrankDecoShop;
 DecoShop cuffCrafting[while(std::mem::read_unsigned($, 4))] @ header.ptrs.CuffCrafting;
